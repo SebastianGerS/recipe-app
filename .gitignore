@@ -4,6 +4,7 @@
 /public/css/*.css
 /public/js/*.js
 /public/mix-maifest.js
+/public/db
 /storage/*.key
 /vendor
 /.idea
@@ -14,3 +15,4 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
+
