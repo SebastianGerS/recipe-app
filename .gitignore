@@ -1,0 +1,9 @@
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+/public/css/*.css
+/public/js/*.js
+/public/mix-mainfest.json
+/node_modules
