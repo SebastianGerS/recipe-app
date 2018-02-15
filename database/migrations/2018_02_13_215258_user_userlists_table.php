@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UserListsTable extends Migration
+class UserUserlistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class UserListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_lists', function (Blueprint $table) {
+        Schema::create('user_userlists', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
-            $table->integer('list_id')->unsigned();
+            $table->integer('userlist_id')->unsigned();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('list_id')->references('id')->on('lists');
+            $table->foreign('userlist_id')->references('id')->on('userlists');
         });
 
        
@@ -31,6 +31,6 @@ class UserListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_lists');
+        Schema::dropIfExists('user_userlists');
     }
 }

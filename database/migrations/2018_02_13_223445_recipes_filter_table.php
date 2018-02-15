@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ListRecipesIngredientsTable extends Migration
+class RecipesFilterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class ListRecipesIngredientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('list_recipe_ingredients', function (Blueprint $table) {
-            $table->integer('list_id');
-            $table->morphs('listable');
-           
+        Schema::create('recipes_filters', function (Blueprint $table) {
+            $table->string('recipe_id');
+            $table->integer('filter_id')->unsigned();
+            $table->foreign('recipe_id')->references('id')->on('recipes');
+            $table->foreign('filter_id')->references('id')->on('filters');
         });
     }
 

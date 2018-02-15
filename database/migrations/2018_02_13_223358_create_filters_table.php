@@ -17,7 +17,6 @@ class CreateFiltersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->enum('type', ['course', 'holiday', 'cuisine']);
-            $table->timestamps();
         });
     }
 
