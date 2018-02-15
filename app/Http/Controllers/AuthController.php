@@ -3,23 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Http\Constrollers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Request\RegisterFormRequest;
+use App\User;
 
 class AuthController extends Controller
 {
     
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
-    public function login() 
+    public function login(Request $request) 
     {
-        $credentials => request(['email, passport']);
+        $credentials = $request->only('email', 'password');
+      
 
         if (! $token = auth()->attempt($credentials)) {
-            return responce()->json(['error' => 'Unaothorized'], 401);
+            return response()->json([
+                'status' => 'error',
+                'error' => 'invalid.credentials',
+                'message' => 'invalid.credentials'
+            ], 401);
         }
 
         return $this->respondWithToken($token);
@@ -29,7 +36,10 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Successfully logged out'
+        ], 200);
     }
 
     public function refresh() 
@@ -39,10 +49,28 @@ class AuthController extends Controller
 
     protected function respondWithToken($token)
     {
-        return responce()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'expires_in' => auth()->factory()->getTTL() * 60
+            ]
         ]);
+    }
+
+    public function register(RegisterFormRequest $request)
+    {
+        $user = new User;
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return response([
+            'status' => 'success',
+            'user' => $user
+        ], 200);
     }
 }
