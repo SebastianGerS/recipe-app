@@ -5,6 +5,7 @@ namespace App;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -41,6 +42,6 @@ class User extends Authenticatable implements JWTSubject
 
     public function lists()
     {
-        return $this->hasMany('App\UserList');
+        return $this->hasMany('App\Userlist');
     }
 }

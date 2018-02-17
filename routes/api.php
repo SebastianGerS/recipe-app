@@ -25,5 +25,5 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('register', 'AuthController@register');
     Route::post('me', 'AuthController@me');
-
+    Route::post('lists', 'ListController@store');
 });

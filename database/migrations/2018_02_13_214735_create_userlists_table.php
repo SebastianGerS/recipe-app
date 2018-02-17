@@ -15,9 +15,12 @@ class CreateUserlistsTable extends Migration
     {
         Schema::create('userlists', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->enum('type', ['recipes', 'ingredients']);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

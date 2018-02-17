@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserList extends Model
+class Userlist extends Model
 {
     protected $fillable = [
+        'user_id',
         'name',
-        'type'
+        'type',
     ];
 
     public function user()
