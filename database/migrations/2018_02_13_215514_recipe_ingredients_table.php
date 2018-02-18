@@ -14,7 +14,7 @@ class RecipeIngredientsTable extends Migration
     public function up()
     {
         Schema::create('recipe_ingredients', function (Blueprint $table) {
-            $table->string('recipe_id');
+            $table->integer('recipe_id')->unsigned();
             $table->integer('ingredient_id')->unsigned();
 
             $table->foreign('recipe_id')->references('id')->on('recipes');

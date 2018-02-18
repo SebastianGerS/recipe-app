@@ -14,7 +14,7 @@ class CreateRecipesTable extends Migration
     public function up()
     {
         Schema::create('recipes', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->increments('id');
             $table->string('name',255);
             $table->integer('time');
             $table->string('img_url', 255);

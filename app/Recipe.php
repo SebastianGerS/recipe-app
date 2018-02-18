@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Recipe extends Model
 {
     protected $fillable = [
-      'id',
       'name',
       'time',
       'img_url',
@@ -16,7 +15,7 @@ class Recipe extends Model
 
     public function lists()
     {
-      return $this->morphMany('App\Userlist', 'listable', 'userlist_recipe_ingredients');
+      return $this->morphToMany('App\Userlist', 'userlistable');
     }
 
     public function ingredients()

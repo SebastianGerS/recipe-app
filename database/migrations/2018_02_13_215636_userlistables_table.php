@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UserlistRecipesIngredientsTable extends Migration
+class UserlistablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class UserlistRecipesIngredientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('userlist_recipes_ingredients', function (Blueprint $table) {
+        Schema::create('userlistables', function (Blueprint $table) {
             $table->integer('userlist_id')->unsigned();
-            $table->morphs('listable');
+            $table->morphs('userlistable');
 
             $table->foreign('userlist_id')->references('id')->on('userlists');
            

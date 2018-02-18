@@ -17,8 +17,13 @@ class Userlist extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function listable() 
+    public function recipes() 
     {
-        return $this->morphTo('userlist_recipes_ingredients');
+        return $this->morphedByMany('App\Userlist', 'userlistable');
+    }
+
+    public function ingredients() 
+    {
+        return $this->morphedByMany('App\Userlist', 'userlistable');
     }
 }

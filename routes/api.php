@@ -26,4 +26,7 @@ Route::group([
     Route::post('register', 'AuthController@register');
     Route::post('me', 'AuthController@me');
     Route::post('lists', 'ListController@store');
+    Route::get('lists', 'ListController@index');
+    Route::post('lists/{list}/recipes', 'RecipeController@store');
+    Route::get('lists/{list}/recipes/{recipe}', 'RecipeController@show');
 });

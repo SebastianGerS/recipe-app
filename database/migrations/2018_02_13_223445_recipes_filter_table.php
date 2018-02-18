@@ -14,7 +14,7 @@ class RecipesFilterTable extends Migration
     public function up()
     {
         Schema::create('recipes_filters', function (Blueprint $table) {
-            $table->string('recipe_id');
+            $table->integer('recipe_id')->unsigned();
             $table->integer('filter_id')->unsigned();
             $table->foreign('recipe_id')->references('id')->on('recipes');
             $table->foreign('filter_id')->references('id')->on('filters');
