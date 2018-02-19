@@ -27,6 +27,7 @@ class RecipeController extends Controller
                         array_push(${$filter->type . 's'}, $filter->name);
                     }
                     foreach($recipe->ingredients as $ingredient) {
+                        $ingredient = $ingredient->amount . ' '. $ingredient->unit_of_measurement . ' ' . $ingredient->name; 
                         array_push($ingredients, $ingredient);
                     }
 
