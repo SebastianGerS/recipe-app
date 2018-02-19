@@ -20,11 +20,11 @@ class Recipe extends Model
 
     public function ingredients()
     {
-      return $this->hasMany('App\Ingredient', 'recipe_ingredients');
+      return $this->belongsToMany('App\Ingredient', 'recipe_ingredients');
     }
 
     public function filters()
     {
-      return $this->hasMany('App\Filter', 'recipes_filters');
+      return $this->belongsToMany('App\Filter', 'recipes_filters');
     }
 }
