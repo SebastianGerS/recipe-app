@@ -15,7 +15,7 @@ class ListController extends Controller
     {   
         $lists = [];
 
-        $user = User::find(auth()->user()->id);
+        $user = auth()->user();
         
         foreach($user->lists as $list) {
             if($list->has('recipes')) {
@@ -48,5 +48,47 @@ class ListController extends Controller
             'user' => $user,
             'list' => $list
         ], 201);
+    }
+
+    public function destroy(Request $request, Userlist $list)
+    {
+        if($list) {
+
+            $user = auth()->user();
+            $toBeRemoved =  $user->lists->where('id', $list->id)->first();
+            
+            if ($toBeRemoved) {
+
+                foreach($list->recipes as $recipe) {
+                  
+                 
+                    $recipe->lists()->detach($list->id);
+
+                    if(count($recipe->lists) === 0){
+
+                        $recipe->filters()->detach();
+                    
+                        foreach($recipe->ingredients as $ingredient) {
+
+                            $recipe->ingredients()->detach($ingredient->id);
+
+                            if (count($ingredient->pivot) <= 1 && count($ingredient->lists) === 0) {  
+                                
+                                $ingredient->delete();
+                            } 
+                        }
+                    
+                        $recipe->delete();
+                    }
+                }
+
+                $list->delete();
+
+                return response()->json( [
+                    'status' => 'success',
+                    'message' => 'the list was successfuly removed from the list'
+                ], 200);
+            }
+        }
     }
 }
