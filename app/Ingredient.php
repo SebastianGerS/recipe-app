@@ -17,8 +17,8 @@ class Ingredient extends Model
       return $this->morphToMany('App\Userlist', 'userlistable');
     }
 
-    public function recipies()
+    public function recipes()
     {
-        return $this-belongsToMany('App\Recipe', 'recipe_ingredients');
+        return $this->belongsToMany('App\Recipe', 'recipe_ingredients');
     }
 }

@@ -74,7 +74,7 @@ class IngredientController extends Controller
 
                     $ingredient->lists()->detach($list->id);
 
-                    if (count($ingredient->pivot) === 0 && count($ingredient->lists) === 0) {  
+                    if (count($ingredient->recipes) === 0 && count($ingredient->lists) === 0) {  
 
                         $ingredient->delete();
                     } 

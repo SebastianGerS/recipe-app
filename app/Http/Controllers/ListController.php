@@ -41,8 +41,7 @@ class ListController extends Controller
         $list = $user->lists()->create(['name' => $request->name, 'type' => $request->type]);
         return response()->json([
             'status' => 'success',
-            'user' => $user,
-            'list' => $list
+            'lists' => $user->lists,
         ], 201);
     }
 
@@ -78,11 +77,24 @@ class ListController extends Controller
                     }
                 }
 
+                foreach($list->ingredients as $ingredient) {
+                  
+                 
+                    $ingredient->lists()->detach($list->id);
+
+                   
+                    if (count($ingredient->recipes) === 0 && count($ingredient->lists) === 0) {  
+                        
+                        $ingredient->delete();
+                    } 
+                     
+                }
+
                 $list->delete();
 
                 return response()->json( [
                     'status' => 'success',
-                    'message' => 'the list was successfuly removed from the list'
+                    'message' => 'the list was successfuly removed'
                 ], 200);
             }
         }
