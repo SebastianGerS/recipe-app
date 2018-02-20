@@ -11,10 +11,12 @@ class IngredientController extends Controller
     public function store(Request $request, Userlist $list)
     {
         $ingredients = $request->ingredients;
+        $lists = [];
+        $user = auth()->user();
 
         if ($list) {
 
-            if ($this->checkIfOwnsList(auth()->user(), $list->id)) {
+            if ($this->checkIfOwnsList($user, $list->id)) {
 
                 foreach($ingredients as $ingredient) {
                     if(is_numeric(substr($ingredient,0,1))) {
@@ -41,10 +43,20 @@ class IngredientController extends Controller
                         
                     }         
                 }
+                
+                foreach($user->lists as $list) {
+                    if (count($list->recipes) !== 0) {
+                        $list->load('recipes');
+                    } else if (count($list->ingredients) !== 0) {
+                        $list->load('ingredients');
+                    }
+                    
+                    array_push($lists, $list);
+                }
 
                 return response()->json( [
                     'status' => 'success',
-                    'ingredients' => $ingredients,
+                    'lists' => $lists,
                     'message' => "The ingredients was added to your list!"
                 ], 200);
             }
