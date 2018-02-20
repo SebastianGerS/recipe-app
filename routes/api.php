@@ -25,10 +25,15 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('register', 'AuthController@register');
     Route::post('me', 'AuthController@me');
+
     Route::post('lists', 'ListController@store');
     Route::get('lists', 'ListController@index');
     Route::delete('lists/{list}', 'ListController@destroy');
-    Route::post('lists/{list}/recipes', 'RecipeController@store');
+
+    Route::post('lists/{list}/ingredients', 'IngredientController@store');
+    Route::delete('lists/{list}/ingredients/{ingredient}', 'IngredientController@destroy');
+
     Route::get('lists/{list}/recipes/{recipe}', 'RecipeController@show');
+    Route::post('lists/{list}/recipes', 'RecipeController@store');
     Route::delete('lists/{list}/recipes/{recipe}', 'RecipeController@destroy');
 });

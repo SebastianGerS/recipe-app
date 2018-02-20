@@ -18,14 +18,10 @@ class ListController extends Controller
         $user = auth()->user();
         
         foreach($user->lists as $list) {
-            if($list->has('recipes')) {
-                $list['recipes'] = Recipe::whereHas('lists', function($query) use ($list) {
-                    $query->where('id', 'like', $list->id);
-                })->get();
-            } else {
-                $list['ingridients'] = Ingredients::whereHas('lists', function($query) use ($list) {
-                    $query->where('id', 'like', $list->id);
-                })->get();
+            if (count($list->recipes) !== 0) {
+                $list->load('recipes');
+            } else if (count($list->ingredients) !== 0) {
+                $list->load('ingredients');
             }
            
             array_push($lists, $list);
