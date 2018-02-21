@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UserlistablesTable extends Migration
+class UserlistRecipesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class UserlistablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('userlistables', function (Blueprint $table) {
+        Schema::create('userlists_recipes', function (Blueprint $table) {
             $table->integer('userlist_id')->unsigned();
-            $table->morphs('userlistable');
-
+            $table->integer('recipe_id')->unsigned();
+            
             $table->foreign('userlist_id')->references('id')->on('userlists');
-           
+            $table->foreign('recipe_id')->references('id')->on('recipes');
+            
         });
     }
 
@@ -29,6 +30,6 @@ class UserlistablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userlist_recipes_ingredients');
+        //
     }
 }

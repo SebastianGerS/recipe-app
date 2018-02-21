@@ -19,11 +19,11 @@ class Userlist extends Model
 
     public function recipes() 
     {
-        return $this->morphedByMany('App\Recipe', 'userlistable');
+        return $this->belongsToMany('App\Recipe', 'userlists_recipes');
     }
 
     public function ingredients() 
     {
-        return $this->morphedByMany('App\Ingredient', 'userlistable');
+        return $this->belongsToMany('App\Ingredient', 'userlists_ingredients');
     }
 }

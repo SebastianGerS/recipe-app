@@ -15,7 +15,7 @@ class CreateFiltersTable extends Migration
     {
         Schema::create('filters', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name',191);
             $table->enum('type', ['course', 'holiday', 'cuisine']);
         });
     }
