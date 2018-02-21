@@ -37,8 +37,21 @@ class ListController extends Controller
 
     public function store(Request $request) 
     {
+        $lists = [];
         $user = User::find(auth()->user()->id);
+
         $list = $user->lists()->create(['name' => $request->name, 'type' => $request->type]);
+        
+        foreach($user->lists as $list) {
+            if (count($list->recipes) !== 0) {
+                $list->load('recipes');
+            } else if (count($list->ingredients) !== 0) {
+                $list->load('ingredients');
+            }
+           
+            array_push($lists, $list);
+        }
+        
         return response()->json([
             'status' => 'success',
             'lists' => $user->lists,
