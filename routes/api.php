@@ -19,12 +19,12 @@ Route::group([
     'prefix' => 'auth'
 
 ], function ($router) {
-
+    
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('register', 'AuthController@register');
-
+    
     Route::post('lists', 'ListController@store');
     Route::get('lists', 'ListController@index');
     Route::delete('lists/{list}', 'ListController@destroy');
