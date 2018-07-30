@@ -35,6 +35,10 @@ task('build', function () {
     run('cd {{release_path}} && build');
 });
 
+task('build', function () {
+    run('cd {{release_path}} && build');
+});
+
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 
@@ -42,5 +46,5 @@ after('deploy:failed', 'deploy:unlock');
 
 before('deploy:symlink', 'artisan:migrate');
 
-after('artisan:migrate', 'artisan:seed:all');
+after('artisan:migrate', 'artisan:db:seed');
 
