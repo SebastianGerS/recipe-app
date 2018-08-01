@@ -1,5 +1,5 @@
 
-## Project can be found at: http://lab4.sebastiangerstelsollerman.chas.academy
+## Project can be found at: http://recipe-api.sebastiangerstelsollerman.me
 
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
